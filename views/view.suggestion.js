@@ -12,7 +12,6 @@ var init_suggestion_view = function () {
 			this.model.fetch_suggestion();
 		},
 		render: function () {
-			console.log('RENDER SUGGESTION');
 			this.$el.html(this.template(this.model.toJSON()));	// add template to view in UI
 			return this;
 		}

@@ -1,3 +1,41 @@
 <a class='place_link' data-place_id='<%= id%>' href='<%= url %>' target='_blank'>
-	<%= name %>
+	<div class='main_place'>
+		<div class='yelp'><img src='images/yelp.png' /></div>
+		<div class='header'>
+			<div class='thumbnail'><img class='round_corners_default' src="<%= image_url %>"/></div>
+			<div class='name'><%= name %></div>
+			<div class='rating'><img src="<%= rating_img_url %>"/><%= review_count %></div>
+		</div>
+		<div class='main round_corners_default'>
+			<div class='category'>
+			<%
+				// based on distance, show a label (close by, a stroll away, a shlep away)
+				if(distance <= 500) print('Close by');
+				else if(distance > 500 && distance <= 1000) print('A stroll away');
+				else print('A shlep away');
+
+				print(',');
+			%>
+			<%
+				// loop through all categories and print them
+				_.each(categories, function(category, index) {
+					if(index > 0)
+						print(' / ');
+
+					print(_.first(category));
+				});
+			%>
+			</div>
+			<div class='address'>
+			<%
+				// loop through all details of address and print them
+				_.each(location.display_address, function(line) {
+					%> <%=line%><br/><%
+				});
+			%>
+			</div>
+			<%= display_phone %>
+		</div>
+		<div class='footer'></div>
+	</div>
 </a>

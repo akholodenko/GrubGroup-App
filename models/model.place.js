@@ -31,8 +31,6 @@ var init_place_model = function () {
 			rating_img_url_small: ""
 		},
 		fetch_suggestion: function () {
-			console.log('get a place');
-
 			var that = this;
 			var api_url = 'http://artem.dev.inpwrd.net/?callback=?';
 			console.log('calling API: ' + api_url);
