@@ -3,11 +3,20 @@
 		<link href="css/all.css" type="text/css" rel="stylesheet" />
 	</head>
 	<body>
-		GrubGroup say go to...
+		GrubGroup says eat at...
+
+		<div class='app' data-version='0.1'>
+			<!-- various app views get loaded into this element-->
+		</div>
 
 		<!-- Javascript includes -->
 		<script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 		<script type='text/javascript' src="libraries/underscore-min.js"></script>
 		<script type='text/javascript' src="libraries/backbone-min.js"></script>
+
+		<script type='text/javascript' src='utils/tpl.js'></script>
+		<script type='text/javascript' src='models/model.place.js'></script>
+		<script type='text/javascript' src='views/view.suggestion.js'></script>
+		<script type='text/javascript' src='main.js'></script>
 	</body>
 </html>
