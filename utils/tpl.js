@@ -13,7 +13,7 @@ var init_template_loader = function () {
 
 			var loadTemplate = function(index) {
 				var name = names[index];
-				console.log('Loading template: ' + name);
+				//console.log('Loading template: ' + name);
 				$.get('templates/' + name + '.html', function(data) {
 					that.templates[name] = data;
 					index++;
