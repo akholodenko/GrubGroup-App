@@ -23,6 +23,7 @@ App.event.suggestion_loaded = 'suggestion_loaded';
 		},
 		routes: {
 			"": "home",
+			"home":"home",
 			"external/:url":"external"
 		},
 		error: null,

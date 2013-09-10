@@ -87,7 +87,9 @@ var init_suggestion_view = function () {
 		},
 		next_button_click: function (e) {
 			this.hold_off();	// clear hold before new suggestion
-			document.location = document.location;	// refresh suggestion
+			//document.location = document.location;	// refresh suggestion
+			this.view_content_el.html("<img class='loader_image' src='images/ajax-loader.gif'/>")
+			this.model.fetch_suggestion();
 		}
 	});
 };
