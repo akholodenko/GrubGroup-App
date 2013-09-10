@@ -47,7 +47,7 @@ App.event.suggestion_loaded = 'suggestion_loaded';
 	// once location is set & user is created
 	$('body').on(User.event_created, function (e) {
 		// load templates for views
-		App.tpl.loadTemplates(['suggestion.view'], function() {
+		App.tpl.loadTemplates(['suggestion.view','header.component'], function() {
 			window.app = new AppRouter();
 			Backbone.history.start();
 		});
