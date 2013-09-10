@@ -53,3 +53,37 @@ Utils.get_guid = function () {
 
 	return guid;
 }
+
+/**	store place's details in local storage	*/
+Utils.set_hold = function (hold_data) {
+	// if browser supports localStorage, store
+	if(typeof(Storage)!=="undefined") {
+		localStorage.grubgroup_hold = JSON.stringify(hold_data);
+		return true;
+	}
+	else return false;
+}
+
+/**	get last held place from local storage	*/
+Utils.get_hold = function () {
+	var hold_data;
+	// if browser supports localStorage
+	if(typeof(Storage)!=="undefined") {
+		// if there's data for holding
+		if(localStorage.grubgroup_hold) hold_data = JSON.parse(localStorage.grubgroup_hold);
+		else hold_data = false;
+
+	}
+	else hold_data = false;
+
+	return hold_data;
+}
+
+Utils.clear_hold = function () {
+	// if browser supports localStorage
+	if(typeof(Storage)!=="undefined") {
+		localStorage.removeItem('grubgroup_hold');
+		return true;
+	}
+	else return false;
+}

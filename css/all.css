@@ -4,6 +4,9 @@ body { font-family: "Open Sans", Helvetica, Arial; }
 .app .place_link { text-decoration: none; }
 .app .round_corners_default { -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; }
 
+#hold_button { cursor: pointer; background-color: #0097ff; padding: 13px; margin: 15px 0px; font-weight: 600; font-size: 25px; color: #fff; }
+#hold_button.on { background-color: red; }
+
 .main_place { text-align: left; color: #888; }
 .main_place .yelp { text-align: right; }
 .main_place .header { min-height: 100px; font-size: 20px; color: #666; font-weight: 500; margin-bottom: 15px; font-weight: 600; }
