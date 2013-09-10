@@ -10,6 +10,9 @@ App.event.suggestion_loaded = 'suggestion_loaded';
 (function ($) {
 	init_template_loader();
 
+	User.init();	// initialize user (location, guid, etc)
+
+
 	// define placeholder for currently displayed view in router
 	Backbone.Router.prototype.current_view = null;
 
@@ -26,15 +29,6 @@ App.event.suggestion_loaded = 'suggestion_loaded';
 		home: function() {
 			init_place_model();
 			init_suggestion_view();
-			/*
-			init_event_model();
-			init_events_model();
-			init_day_model();
-			init_days_model();
-
-			init_event_view();
-			init_events_view();
-			*/
 
 			this.show_view(new App.SuggestionView());
 		},
@@ -60,10 +54,14 @@ App.event.suggestion_loaded = 'suggestion_loaded';
 		}
 	});
 
-	// load templates for views
-	App.tpl.loadTemplates(['suggestion.view'], function() {
-		window.app = new AppRouter();
-		Backbone.history.start();
+
+	// once location is set & user is created
+	$('body').on(User.event_created, function (e) {
+		// load templates for views
+		App.tpl.loadTemplates(['suggestion.view'], function() {
+			window.app = new AppRouter();
+			Backbone.history.start();
+		});
 	});
 
 } (jQuery));
