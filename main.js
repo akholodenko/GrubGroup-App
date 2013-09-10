@@ -25,27 +25,16 @@ App.event.suggestion_loaded = 'suggestion_loaded';
 			"": "home",
 			"external/:url":"external"
 		},
+		error: null,
 		// route for home
 		home: function() {
 			init_place_model();
-			init_suggestion_view();
+			init_suggestion_view(this.error);
 
 			this.show_view(new App.SuggestionView());
 		},
 		// route for external event link in frame
 		external: function(url) {
-			/*
-			url = decodeURIComponent(url);
-			console.log('load: ' + url);
-
-			init_event_model();
-			init_external_view();
-
-			var event = new App.Event();
-			event.set({ link: url });
-
-			this.show_view(new App.ExternalView({ model: event }));
-			*/
 		},
 		// show desired view
 		show_view: function(view) {
@@ -62,6 +51,11 @@ App.event.suggestion_loaded = 'suggestion_loaded';
 			window.app = new AppRouter();
 			Backbone.history.start();
 		});
+	});
+
+	// if there's a problem getting geolocation
+	$('body').on(User.event_geolocation_denied, function (e) {
+		$('.app').html('Unable to determine your location');
 	});
 
 } (jQuery));

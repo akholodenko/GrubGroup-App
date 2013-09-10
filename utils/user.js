@@ -10,6 +10,7 @@ User = function () {
 User.event_created = 'user_created';
 User.event_exists = 'user_exists';
 User.event_location_set = 'location_set';
+User.event_geolocation_denied = 'location_denied';
 
 /**	initialize current user	*/
 User.init = function () {

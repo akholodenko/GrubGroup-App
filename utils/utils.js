@@ -10,7 +10,6 @@ Utils.getLocation = function (callback) {
 			    {
 				    case error.PERMISSION_DENIED:
 				      error_message = "We were not allowed to identify your location."
-				      Track.send_deny_geolocation_event();
 				      break;
 				    case error.POSITION_UNAVAILABLE:
 				      error_message = "We had a problem identifying your location."
@@ -24,10 +23,9 @@ Utils.getLocation = function (callback) {
 			    }
 
 				console.log(error_message);
-			    alert(error_message);
 
-				//$('body').trigger(User.event_request_zipcode, []);	// get zipcode manually from user
-			  });    
+				$('body').trigger(User.event_geolocation_denied, [{'message' : error_message}]);	// trigger event for geolocation denied
+		  });
     else
 		console.log("Geolocation is not supported by this browser.");
 }
