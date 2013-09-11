@@ -38,6 +38,10 @@ var init_suggestion_view = function () {
 		renderSuggestion: function () {
 			this.view_content_el.html(this.template(this.model.toJSON()));	// add template to view in UI
 			this.init_buttons();
+
+			// send analytics about suggestion
+			Track.sendSuggestionEvent(this.model.toJSON().location.city + ', ' + this.model.toJSON().location.state_code, this.model.toJSON().name);
+
 			return this;
 		},
 		// render UI of place "held" by user
