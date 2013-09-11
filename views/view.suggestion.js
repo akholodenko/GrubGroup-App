@@ -83,16 +83,19 @@ var init_suggestion_view = function () {
 			this.hold_button.removeClass('off').addClass('on');	// update UI for holding
 			this.is_hold = true;	// set flag on for holding
 			Utils.set_hold(this.model.toJSON());	// store place data in local storage
+			Track.sendHoldButtonEvent(true);	// send analytics
 		},
 		hold_off: function () {
 			this.hold_button.removeClass('on').addClass('off');	// update UI for not holding
 			this.is_hold = false;	// set flag off for holding
 			Utils.clear_hold();	// clear stored value in local storage
+			Track.sendHoldButtonEvent(false);	// send analytics
 		},
 		next_button_click: function (e) {
 			this.hold_off();	// clear hold before new suggestion
 			//document.location = document.location;	// refresh suggestion
 			this.view_content_el.html("<img class='loader_image' src='images/ajax-loader.gif'/>")
+			Track.sendNextButtonEvent();	// send analytics
 			this.model.fetch_suggestion();
 		}
 	});
