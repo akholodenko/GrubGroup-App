@@ -36,11 +36,13 @@ Track.sendGAEvent = function (category, action, label, value) {
 	if(value == undefined) value = 0;
 
 	_gaq.push(['_trackEvent', category, action, label, value]);
-	console.log('GA: ' + category + '/' + action + '/' + label + '/' + value);
+	//console.log('GA: ' + category + '/' + action + '/' + label + '/' + value);
 }
 
 /**	send Place suggestion event	*/
 Track.sendSuggestionEvent = function (location, name) {
 	Track.sendGAEvent(Track.Key_Page_Load, 'suggestion', location);
 	Track.sendGAEvent('suggestion', location, name);
+	Track.sendGAEvent('user', 'location', location);	// send user location
+	Track.sendGAEvent('user', 'guid', App.user.guid);	// send user guid
 }
