@@ -41,5 +41,6 @@ Track.sendGAEvent = function (category, action, label, value) {
 
 /**	send Place suggestion event	*/
 Track.sendSuggestionEvent = function (location, name) {
-	Track.sendGAEvent(Track.Key_Page_Load, 'suggestion', location, name);
+	Track.sendGAEvent(Track.Key_Page_Load, 'suggestion', location);
+	Track.sendGAEvent('suggestion', location, name);
 }
