@@ -19,7 +19,7 @@ var init_suggestion_view = function () {
 			this.model = new App.Place();
 
 			// render header UI
-			this.renderHeader('GrubGroup says eat at...');
+			this.renderHeader('GrubFor.me says eat at...');
 
 			// check if a place is "held" by user
 			var hold_data = Utils.get_hold();
