@@ -5,6 +5,8 @@ App.user = null;
 /**	app event types	*/
 App.event = new Object();
 App.event.suggestion_loaded = 'suggestion_loaded';
+App.event.suggestions_loaded = 'suggestions_loaded';
+App.event.no_results_loaded = 'no_results_loaded';
 //App.event.show_loader = 'app_event_show_loader';
 
 (function ($) {
@@ -30,6 +32,7 @@ App.event.suggestion_loaded = 'suggestion_loaded';
 		// route for home
 		home: function() {
 			init_place_model();
+			init_place_collection();
 			init_suggestion_view(this.error);
 
 			this.show_view(new App.SuggestionView());

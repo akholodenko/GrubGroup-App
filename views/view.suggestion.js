@@ -12,8 +12,11 @@ var init_suggestion_view = function () {
 		initialize: function () {
 			console.log('init suggestion view');
 
+			this.collection = new App.Places();	// instance of collection of places
+			this.collection.on(App.event.suggestions_loaded, this.renderSuggestion, this);	// listener for list of places loaded
+			this.collection.on(App.event.no_results_loaded, this.renderNoSuggestions, this);	// listener for no places found
+
 			this.model = new App.Place();
-			this.model.on(App.event.suggestion_loaded, this.renderSuggestion, this);
 
 			// render header UI
 			this.renderHeader('GrubGroup says eat at...');
@@ -21,10 +24,9 @@ var init_suggestion_view = function () {
 			// check if a place is "held" by user
 			var hold_data = Utils.get_hold();
 
-			if(hold_data === false)
-				this.model.fetch_suggestion();
-			else
-				this.renderHoldPlace(hold_data);
+			// get places or show hold place
+			if(hold_data === false) this.collection.fetch_suggestions();
+			else this.renderHoldPlace(hold_data);
 		},
 		renderHeader: function (text) {
 			var header_template = _.template(App.tpl.get('header.component'));
@@ -36,13 +38,21 @@ var init_suggestion_view = function () {
 		},
 		// render UI of place and hold button
 		renderSuggestion: function () {
-			this.view_content_el.html(this.template(this.model.toJSON()));	// add template to view in UI
-			this.init_buttons();
+			if(!this.is_hold)	// only if place isn't being held, get the next suggestion
+				this.model = this.collection.fetch_suggestion();
 
-			// send analytics about suggestion
-			Track.sendSuggestionEvent(this.model.toJSON().location.city + ', ' + this.model.toJSON().location.state_code, this.model.toJSON().name);
+			if(this.model != null) {
+				console.log('count:' + this.collection.length + ', index: ' + this.collection.index);
+				this.view_content_el.html(this.template(this.model.toJSON()));	// add template to view in UI
+				this.init_buttons();
 
+				// send analytics about suggestion
+				Track.sendSuggestionEvent(this.model.toJSON().location.city + ', ' + this.model.toJSON().location.state_code, this.model.toJSON().name);
+			}
 			return this;
+		},
+		renderNoSuggestions: function () {
+			console.log('no suggestions found');
 		},
 		// render UI of place "held" by user
 		renderHoldPlace: function (hold_data) {
@@ -96,7 +106,7 @@ var init_suggestion_view = function () {
 			//document.location = document.location;	// refresh suggestion
 			this.view_content_el.html("<img class='loader_image' src='images/ajax-loader.gif'/>")
 			Track.sendNextButtonEvent();	// send analytics
-			this.model.fetch_suggestion();
+			this.renderSuggestion();
 		}
 	});
 };
