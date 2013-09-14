@@ -18,7 +18,7 @@ var init_place_collection = function () {
 				return null;
 			}
 		},
-		fetch_suggestions: function () {
+		fetch_suggestions: function (in_background) {
 			var that = this;
 
 			// default location to 128 King if not set
@@ -32,10 +32,10 @@ var init_place_collection = function () {
 			console.log('location: ' + App.user.latitude + ',' + App.user.longitude);
 
 			$.getJSON(api_url, null, function (response) {
-				that.parse(response); // call the parse function, to process the results and create models in collection
+				that.parse(response, in_background); // call the parse function, to process the results and create models in collection
 			});
 		},
-		parse: function (response) {
+		parse: function (response, in_background) {
 			var that = this;
 
 			if(response == null) response = new Array();
@@ -54,7 +54,9 @@ var init_place_collection = function () {
 					that.add(place);
 				});
 
-				this.trigger(App.event.suggestions_loaded);
+				// trigger event if request is not to run in the background
+				if(in_background ==  undefined || in_background ==  false)
+					this.trigger(App.event.suggestions_loaded);
 			}
 		}
 	});

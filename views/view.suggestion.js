@@ -58,7 +58,10 @@ var init_suggestion_view = function () {
 		renderHoldPlace: function (hold_data) {
 			this.is_hold = true;
 			this.model.set(hold_data);
-			this.renderSuggestion();
+			this.renderSuggestion();	// render hold place
+
+			// in background, get list of suggestions once hold is off
+			this.collection.fetch_suggestions(true);
 		},
 		init_buttons: function () {
 			this.view_content_el.append("<div id='button_container'></div>");
