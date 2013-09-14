@@ -4,6 +4,7 @@ var init_suggestion_view = function () {
 	App.SuggestionView = Backbone.View.extend({
 		el: $(".app"),
 		view_content_el: null,
+		footer_el: null,
 		button_container: null,
 		hold_button: null,
 		next_button: null,
@@ -18,8 +19,9 @@ var init_suggestion_view = function () {
 
 			this.model = new App.Place();
 
-			// render header UI
+			// render header/footer UI
 			this.renderHeader('GrubFor.me says eat at...');
+			this.renderFooter();
 
 			// check if a place is "held" by user
 			var hold_data = Utils.get_hold();
@@ -36,6 +38,11 @@ var init_suggestion_view = function () {
 			this.$el.append("<div class='view_content'><img class='loader_image' src='images/ajax-loader.gif'/></div>");
 			this.view_content_el = $('.view_content');
 		},
+		renderFooter: function () {
+			this.$el.append("<div class='footer'></div>");
+			this.footer = $('.footer');
+			this.init_buttons();
+		},
 		// render UI of place and hold button
 		renderSuggestion: function () {
 			if(!this.is_hold)	// only if place isn't being held, get the next suggestion
@@ -44,7 +51,6 @@ var init_suggestion_view = function () {
 			if(this.model != null) {
 				console.log('count:' + this.collection.length + ', index: ' + this.collection.index);
 				this.view_content_el.html(this.template(this.model.toJSON()));	// add template to view in UI
-				this.init_buttons();
 
 				// send analytics about suggestion
 				Track.sendSuggestionEvent(this.model.toJSON().location.city + ', ' + this.model.toJSON().location.state_code, this.model.toJSON().name);
@@ -57,6 +63,7 @@ var init_suggestion_view = function () {
 		// render UI of place "held" by user
 		renderHoldPlace: function (hold_data) {
 			this.is_hold = true;
+			this.hold_button.removeClass('off').addClass('on');	// update UI for holding
 			this.model.set(hold_data);
 			this.renderSuggestion();	// render hold place
 
@@ -64,7 +71,7 @@ var init_suggestion_view = function () {
 			this.collection.fetch_suggestions(true);
 		},
 		init_buttons: function () {
-			this.view_content_el.append("<div id='button_container'></div>");
+			this.footer.append("<div id='button_container'></div>");
 			this.button_container = $("#button_container");
 
 			this.init_hold_button();
