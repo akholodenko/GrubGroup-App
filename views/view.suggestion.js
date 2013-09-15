@@ -50,6 +50,11 @@ var init_suggestion_view = function () {
 
 			if(this.model != null) {
 				console.log('count:' + this.collection.length + ', index: ' + this.collection.index);
+
+				// add current location to view (used for map link)
+				this.model.attributes['latitude'] = App.user.latitude;
+				this.model.attributes['longitude'] = App.user.longitude;
+
 				this.view_content_el.html(this.template(this.model.toJSON()));	// add template to view in UI
 
 				// send analytics about suggestion
