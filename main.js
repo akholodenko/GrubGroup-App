@@ -26,6 +26,7 @@ App.event.no_results_loaded = 'no_results_loaded';
 		routes: {
 			"": "home",
 			"home":"home",
+			"!":"home",	// linkedin redirect
 			"external/:url":"external"
 		},
 		error: null,
