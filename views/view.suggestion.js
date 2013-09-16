@@ -84,22 +84,23 @@ var init_suggestion_view = function () {
 			this.next_button = $('#next_button');
 		},
 		events : {
+			"click a" : "hold_on", // click on any link turns on HOLD
 			"click #hold_button" : "hold_button_toggle",
 			"click #next_button" : "next_button_click"
 		},
 		hold_button_toggle: function (e) {
 			// check if button is ON or OFF
-			if(this.hold_button.hasClass('off')) this.hold_on();
-			else  this.hold_off();
+			if(this.hold_button.hasClass('off')) this.hold_on(e);
+			else  this.hold_off(e);
 
 		},
-		hold_on: function () {
+		hold_on: function (e) {
 			this.hold_button.removeClass('off').addClass('on');	// update UI for holding
 			this.is_hold = true;	// set flag on for holding
 			Utils.set_hold(this.model.toJSON());	// store place data in local storage
 			Track.sendHoldButtonEvent(true);	// send analytics
 		},
-		hold_off: function () {
+		hold_off: function (e) {
 			this.hold_button.removeClass('on').addClass('off');	// update UI for not holding
 			this.is_hold = false;	// set flag off for holding
 			Utils.clear_hold();	// clear stored value in local storage
