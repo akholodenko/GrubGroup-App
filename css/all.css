@@ -32,3 +32,10 @@ body { font-family: "Open Sans", Helvetica, Arial; margin:0; padding:0; }
 .main_place .main .address { min-height: 50px; display: block; margin-bottom: 20px; }
 .main_place .main .address .map_icon { margin: -5px 15px 0px -2px; width: 50px; height: auto; float: left; }
 .main_place .main .phone { margin-left: 62px; }
+
+.error {}
+.error .title { margin-bottom: 15px;  font-weight: 500; font-size: 20px; }
+
+.error.geo { padding: 27px 0px 0px 10px; text-align: left; height: 65px; }
+.error.geo .icon { width: 50px; height: auto; float: left; }
+.error.geo .title, .error.geo .message { margin-left: 65px; }

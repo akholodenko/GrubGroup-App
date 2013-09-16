@@ -14,6 +14,7 @@ App.event.no_results_loaded = 'no_results_loaded';
 
 	User.init();	// initialize user (location, guid, etc)
 
+	init_parent_view();	// initialize the parent of all views
 
 	// define placeholder for currently displayed view in router
 	Backbone.Router.prototype.current_view = null;
@@ -60,7 +61,12 @@ App.event.no_results_loaded = 'no_results_loaded';
 
 	// if there's a problem getting geolocation
 	$('body').on(User.event_geolocation_denied, function (e) {
-		$('.app').html('Unable to determine your location');
+		App.tpl.loadTemplates(['geolocation_denied.view','header.component'], function() {
+			init_geolocation_denied_view();
+			var current_view = new App.GeolocationDeniedView();
+			//$('.app').html('Unable to determine your location');
+			//Backbone.history.start();
+		});
 	});
 
 } (jQuery));

@@ -1,10 +1,7 @@
 var init_suggestion_view = function () {
 
 	/**	Suggestion PLACE view	*/
-	App.SuggestionView = Backbone.View.extend({
-		el: $(".app"),
-		view_content_el: null,
-		footer_el: null,
+	App.SuggestionView = App.ParentView.extend({
 		button_container: null,
 		hold_button: null,
 		next_button: null,
@@ -29,14 +26,6 @@ var init_suggestion_view = function () {
 			// get places or show hold place
 			if(hold_data === false) this.collection.fetch_suggestions();
 			else this.renderHoldPlace(hold_data);
-		},
-		renderHeader: function (text) {
-			var header_template = _.template(App.tpl.get('header.component'));
-			this.$el.html(header_template({'text' : text}));	// add template to header in UI
-
-			// add view UI container and spinner until content loads
-			this.$el.append("<div class='view_content'><img class='loader_image' src='images/ajax-loader.gif'/></div>");
-			this.view_content_el = $('.view_content');
 		},
 		renderFooter: function () {
 			this.$el.append("<div class='footer'></div>");
