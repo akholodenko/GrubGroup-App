@@ -28,6 +28,7 @@ App.event.no_results_loaded = 'no_results_loaded';
 			"": "home",
 			"home":"home",
 			"!":"home",	// linkedin redirect
+			"settings":"settings",
 			"external/:url":"external"
 		},
 		error: null,
@@ -38,6 +39,11 @@ App.event.no_results_loaded = 'no_results_loaded';
 			init_suggestion_view(this.error);
 
 			this.show_view(new App.SuggestionView());
+		},
+		settings: function () {
+			init_settings_view();
+
+			this.show_view(new App.SettingsView());
 		},
 		// route for external event link in frame
 		external: function(url) {
