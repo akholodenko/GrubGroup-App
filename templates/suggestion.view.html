@@ -8,9 +8,19 @@
 	<div class='main round_corners_default'>
 		<div class='category'>
 		<%
+			var close = 500;
+			var near = 1000;
+			var near_text = 'A stroll away';
+
+			if(is_driving) {
+				close = 3200;
+				near = 6400;
+				near_text = 'A drive away';
+			}
+
 			// based on distance, show a label (close by, a stroll away, a shlep away)
-			if(distance <= 500) print('Close by');
-			else if(distance > 500 && distance <= 1000) print('A stroll away');
+			if(distance <= close) print('Close by');
+			else if(distance > close && distance <= near) print(near_text);
 			else print('A shlep away');
 
 			print(',');

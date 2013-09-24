@@ -27,7 +27,10 @@ var init_place_collection = function () {
 				App.user.longitude = '-122.39071';
 			}
 
-			var api_url = 'http://artem.dev.inpwrd.net/yelp/all?radius=1250&lat=' + App.user.latitude + '&lon=' + App.user.longitude + '&callback=?';
+			// walking vs. driving radius
+			var radius = (App.user.settings.is_driving) ? '8000' : '1250';
+
+			var api_url = 'http://artem.dev.inpwrd.net/yelp/all?radius=' + radius + '&lat=' + App.user.latitude + '&lon=' + App.user.longitude + '&callback=?';
 			console.log('calling API: ' + api_url);
 			console.log('location: ' + App.user.latitude + ',' + App.user.longitude);
 
