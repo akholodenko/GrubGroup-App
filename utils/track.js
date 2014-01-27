@@ -8,6 +8,7 @@ Track.Key_Page_Load = "page load";
 Track.Key_Click_Link = "click_link";
 Track.Key_DenyLocation = "deny_location";
 Track.Key_User = "user";
+Track.Key_Settings = "settings";
 
 /*
 Track.send_event = function (event)
@@ -46,6 +47,7 @@ Track.sendSuggestionEvent = function (location, name) {
 	Track.sendGAEvent('suggestion', location, name);
 	Track.sendGAEvent(Track.Key_User, 'location', location);	// send user location
 	Track.sendGAEvent(Track.Key_User, 'guid', App.user.guid);	// send user guid
+	Track.sendGAEvent(Track.Key_Settings, 'radius type', (App.user.settings.is_driving) ? 'driving' : 'walking');	// send user setting selection
 }
 
 /** send Hold buttona ction */

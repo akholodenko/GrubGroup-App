@@ -85,3 +85,27 @@ Utils.clear_hold = function () {
 	}
 	else return false;
 }
+
+/**	store place's details in local storage	*/
+Utils.set_settings = function (settings_data) {
+	// if browser supports localStorage, store
+	if(typeof(Storage)!=="undefined") {
+		localStorage.grubgroup_settings = JSON.stringify(settings_data);
+		return true;
+	}
+	else return false;
+}
+
+/**	get last held place from local storage	*/
+Utils.get_settings = function () {
+	var settings_data;
+	// if browser supports localStorage
+	if(typeof(Storage)!=="undefined") {
+		// if there's data for holding
+		if(localStorage.grubgroup_settings) settings_data = JSON.parse(localStorage.grubgroup_settings);
+		else settings_data = false;
+	}
+	else settings_data = false;
+
+	return settings_data;
+}

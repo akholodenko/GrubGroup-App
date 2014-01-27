@@ -43,6 +43,7 @@ var init_suggestion_view = function () {
 				// add current location to view (used for map link)
 				this.model.attributes['latitude'] = App.user.latitude;
 				this.model.attributes['longitude'] = App.user.longitude;
+				this.model.attributes['is_driving'] = App.user.settings.is_driving;
 
 				this.view_content_el.html(this.template(this.model.toJSON()));	// add template to view in UI
 

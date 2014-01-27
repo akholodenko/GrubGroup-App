@@ -8,11 +8,19 @@ body { font-family: "Open Sans", Helvetica, Arial; margin:0; padding:0; }
 .app .view_content { margin: 60px 0px 85px; background-color: #fff;  }
 .app .footer { position: fixed; left: 0px; bottom: 0px; width: 100%; background-color: #ccc; }
 .app .settings { cursor: pointer; position: fixed; top: 0px; right: 0px; z-index: 10102; }
-.app .settings img { width: 49px; height: auto; }
+.app .settings img { width: 49px; height: auto; position: relative; top: -24px; }
+.app .settings .bg_on { visibility: hidden; top: 13px; width: 26px; height: 24px; left: 11px; position: relative; background-color: #fff;
+                        -webkit-border-radius: 11px; -moz-border-radius: 11px; border-radius: 11px;
+}
+.app .settings.on .bg_on { visibility: visible }
 
 .app .place_link { text-decoration: none; }
 .app .round_corners_default { -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; }
 .app .loader_image { margin-top: 25px; }
+
+#settings_container { text-align: left; margin: 0px 25px; }
+#settings_container .settings_row { border-bottom: 1px solid #eee; padding: 20px 0px; font-size: 20px; }
+#settings_container .settings_row .settings_switch { float: right;}
 
 .button { width: 35%; float: right; cursor: pointer; background-color: #0097ff; padding: 13px; margin: 10px 0px; font-weight: 600; font-size: 25px; color: #fff; }
 #button_container { margin: 0px auto; width: 100%; }
